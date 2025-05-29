@@ -54,6 +54,7 @@ int main() {
         
         // Print what server sent us
         printf("%s", message);
+
         
         // If server is asking a math question, get our answer
         if(strstr(message, "What is")) {  // Look for math questions
@@ -66,6 +67,14 @@ int main() {
             // Send our answer to server
             send(my_socket, my_answer, strlen(my_answer), 0);
         }
+
+        if (strstr(message, "You WIN!")) {
+            printf("🎉 Congratulations! You are the winner!\n");
+        } else if (strstr(message, "You lose")) {
+            printf("😢 Better luck next time!\n");
+        } else if (strstr(message, "It's a TIE")) {
+            printf("🤝 It's a tie! Good game!\n");
+        }
         
         // If game is over, quit
         if(strstr(message, "GAME OVER")) {
@@ -73,6 +82,7 @@ int main() {
             sleep(2);  // Wait 2 seconds before closing
             break;
         }
+
     }
     
     close(my_socket);
